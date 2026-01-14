@@ -38,3 +38,5 @@ jobs:
         script: |
           sudo aws s3 sync s3://s3-web-server-260114 /var/www/html --delete
           # 여기서도 '본인의-버킷-이름'을 수정하세요.
+
+          sudo systemctl reload nginx
