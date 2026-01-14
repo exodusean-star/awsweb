@@ -25,7 +25,7 @@ jobs:
     # 3. S3로 파일 동기화 (배포)
     - name: Upload to S3
       run: |
-        aws s3 sync . s3://본인의-버킷-이름 --delete --exclude ".git/*" --exclude ".github/*"
+        aws s3 sync . s3://s3-web-server-260114 --delete --exclude ".git/*" --exclude ".github/*"
         # '본인의-버킷-이름' 부분을 실제 생성한 버킷 명으로 수정하세요!
 
     # 4. EC2에 접속하여 S3 파일 가져오기 (웹 서버 반영)
@@ -36,5 +36,5 @@ jobs:
         username: ec2-user                  # Amazon Linux 사용 시 기본값
         key: ${{ secrets.EC2_SSH_KEY }}     # .pem 키 파일의 텍스트 전체
         script: |
-          sudo aws s3 sync s3://본인의-버킷-이름 /var/www/html --delete
+          sudo aws s3 sync s3://s3-web-server-260114 /var/www/html --delete
           # 여기서도 '본인의-버킷-이름'을 수정하세요.
